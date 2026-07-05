@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aegis Cyber Investigation Suite - AI Job Scam Detector</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background grid pattern & glowing orbs for cyber aesthetic -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M12 8v4M12 16h.01" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>AEGIS CYBER</h1>
+                    <span class="logo-sub">INTELLIGENCE SUITE</span>
+                </div>
+            </div>
+            <div class="system-status">
+                <span class="status-dot pulsed"></span>
+                <span class="status-lbl">AI ENGINE: ONLINE</span>
+                <span class="engine-ver">GEMINI 3.5 FLASH</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="app-nav">
+        <div class="nav-container">
+            <button class="nav-btn active" id="tab-investigation">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                🕵️ Investigation Terminal
+            </button>
+            <button class="nav-btn" id="tab-community">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                👥 Community Intelligence
+            </button>
+        </div>
+    </nav>
+
+    <main class="app-main">
+        <!-- ================= INVESTIGATION TAB ================= -->
+        <section id="pane-investigation" class="tab-pane active">
+            <div class="grid-layout">
+                <!-- Input Panel -->
+                <div class="card input-card">
+                    <div class="card-header">
+                        <h2>Analyze Job Posting</h2>
+                        <p class="card-subtitle">Paste the email, message, or posting text below to run a cyber forensics investigation.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-presets">
+                            <label class="section-label">Select a Preset Scenario:</label>
+                            <div class="preset-btns">
+                                <button class="btn-preset" data-preset="whatsapp">💬 WhatsApp Remote Assistant</button>
+                                <button class="btn-preset" data-preset="amazon">📦 Amazon Package Dispatcher</button>
+                                <button class="btn-preset" data-preset="crypto">🪙 Crypto Yield Clerk</button>
+                            </div>
+                        </div>
+
+                        <div class="input-wrapper">
+                            <textarea id="job-input" placeholder="Paste the suspicious job description, recruitment email, or chat conversation here..." autocomplete="off" spellcheck="false"></textarea>
+                            
+                            <div class="drop-zone" id="file-drop-zone">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                </svg>
+                                <span>Drag & Drop file or <span class="browse-link">browse</span></span>
+                                <input type="file" id="file-uploader" accept=".txt,.pdf,.doc,.docx" style="display: none;">
+                            </div>
+                        </div>
+
+                        <div class="input-actions">
+                            <button id="btn-clear" class="btn btn-secondary">Clear Input</button>
+                            <button id="btn-investigate" class="btn btn-primary">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="22 2 11 13 22 22"/>
+                                </svg>
+                                Run Investigation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forensic Scanning Logs Panel (Simulated Thinking Animation) -->
+                <div class="card scanner-card hidden" id="scanner-panel">
+                    <div class="card-header border-glow-yellow">
+                        <div class="scanner-title-area">
+                            <span class="scanner-loading-spinner"></span>
+                            <h2>🕵️ Cyber Investigation in Progress...</h2>
+                        </div>
+                    </div>
+                    <div class="card-body terminal-body">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">AEGIS-CRIMESTOPPER-v1.0.4.sh</span>
+                        </div>
+                        <div class="terminal-console" id="scanner-logs">
+                            <!-- Injected dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Results Panel -->
+                <div class="results-dashboard hidden" id="results-panel">
+                    
+                    <!-- Row 1: Passport, Confidence, and Trust Meter -->
+                    <div class="results-row row-3col">
+                        <!-- Passport Card -->
+                        <div class="card metric-card passport-card">
+                            <div class="card-header">
+                                <h3>Cyber Trust Passport</h3>
+                                <p class="card-subtitle">Credential score verification checklist</p>
+                            </div>
+                            <div class="card-body">
+                                <table class="passport-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Indicator</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="passport-rows">
+                                        <!-- Injected dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Confidence Meter & Overall Risk -->
+                        <div class="card metric-card risk-card highlight-glow">
+                            <div class="card-header">
+                                <h3>Investigation Verdict</h3>
+                                <p class="card-subtitle">AI-evaluated risk classification</p>
+                            </div>
+                            <div class="card-body centered-flex">
+                                <div class="verdict-banner" id="verdict-banner">
+                                    SUSPICIOUS
+                                </div>
+                                <div class="confidence-container">
+                                    <div class="confidence-header">
+                                        <span>AI Confidence Score</span>
+                                        <span id="confidence-value">85%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-yellow" id="confidence-fill" style="width: 85%;"></div>
+                                    </div>
+                                    <p class="confidence-reason" id="confidence-reason">
+                                        Multiple alignment red flags detected, particularly suspicious communication channels.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trust Meter -->
+                        <div class="card metric-card trust-card">
+                            <div class="card-header">
+                                <h3>Trust Meter</h3>
+                                <p class="card-subtitle">Safety evaluation breakdown</p>
+                            </div>
+                            <div class="card-body flex-column">
+                                <div class="trust-meter-item">
+                                    <div class="meter-info">
+                                        <span>Company Identity</span>
+                                        <span id="trust-company-lbl">90%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-cyan" id="trust-company-fill" style="width: 90%;"></div>
+                                    </div>
+                                </div>
+                                <div class="trust-meter-item">
+                                    <div class="meter-info">
+                                        <span>Recruiter Identity</span>
+                                        <span id="trust-recruiter-lbl">20%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-red" id="trust-recruiter-fill" style="width: 20%;"></div>
+                                    </div>
+                                </div>
+                                <div class="trust-meter-item">
+                                    <div class="meter-info">
+                                        <span>Website / Domain Safety</span>
+                                        <span id="trust-web-lbl">40%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-yellow" id="trust-web-fill" style="width: 40%;"></div>
+                                    </div>
+                                </div>
+                                <div class="trust-meter-item">
+                                    <div class="meter-info">
+                                        <span>Payment Requirements</span>
+                                        <span id="trust-payment-lbl">5%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill fill-red" id="trust-payment-fill" style="width: 5%;"></div>
+                                    </div>
+                                </div>
+                                <div class="trust-overall-score mt-auto">
+                                    <span>Overall Trust Index:</span>
+                                    <span class="score-large" id="trust-overall-lbl">38/100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Scam DNA & Scam Persona -->
+                    <div class="results-row row-2col">
+                        <!-- Scam DNA -->
+                        <div class="card dna-card">
+                            <div class="card-header">
+                                <h3>🧬 Scam DNA Makeup</h3>
+                                <p class="card-subtitle">Weight of psychological manipulation tactics detected</p>
+                            </div>
+                            <div class="card-body flex-column">
+                                <div class="dna-container" id="dna-container">
+                                    <!-- Dynamic DNA progress grids injected via JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attacker Profile -->
+                        <div class="card persona-card">
+                            <div class="card-header">
+                                <h3>👤 Threat Actor Persona Profile</h3>
+                                <p class="card-subtitle">Analysis of the recruiter's tactics and goals</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="persona-grid">
+                                    <div class="persona-item">
+                                        <span class="persona-lbl">Identity:</span>
+                                        <span class="persona-val" id="persona-identity">Fake HR Executive</span>
+                                    </div>
+                                    <div class="persona-item">
+                                        <span class="persona-lbl">Primary Goal:</span>
+                                        <span class="persona-val" id="persona-goal">Extract money & bank details</span>
+                                    </div>
+                                    <div class="persona-item">
+                                        <span class="persona-lbl">Tactics Used:</span>
+                                        <span class="persona-val" id="persona-tactic">Authority + Artificial Urgency</span>
+                                    </div>
+                                    <div class="persona-item">
+                                        <span class="persona-lbl">Target Audience:</span>
+                                        <span class="persona-val" id="persona-target">Students & Remote Jobseekers</span>
+                                    </div>
+                                    <div class="persona-item full-width">
+                                        <span class="persona-lbl">Risk Classification:</span>
+                                        <span class="persona-val text-red" id="persona-risk">CRITICAL (High Financial Loss Risk)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Attack Chain & Timeline -->
+                    <div class="results-row row-2col">
+                        <!-- Attack Chain -->
+                        <div class="card attack-chain-card">
+                            <div class="card-header">
+                                <h3>💥 "What Would Happen Next?"</h3>
+                                <p class="card-subtitle">Simulated attack chain detailing the danger cascade</p>
+                            </div>
+                            <div class="card-body overflow-x">
+                                <div class="flow-container" id="attack-chain-flow">
+                                    <!-- Dynamic attack chain flow injected via JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Candidate Journey Timeline -->
+                        <div class="card timeline-card">
+                            <div class="card-header">
+                                <h3>📅 Forensic Timeline</h3>
+                                <p class="card-subtitle">Chronological sequence of interaction and risks</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="timeline-container" id="timeline-list">
+                                    <!-- Injected timeline elements -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: AI Decision Tree & Scam Comparison -->
+                    <div class="results-row row-2col">
+                        <!-- AI Decision Tree -->
+                        <div class="card decision-tree-card">
+                            <div class="card-header">
+                                <h3>🌳 AI Forensic Decision Tree</h3>
+                                <p class="card-subtitle">Reasoning path Gemini followed to reach this verdict</p>
+                            </div>
+                            <div class="card-body layout-tree" id="decision-tree-container">
+                                <!-- Injected decision tree diagram -->
+                            </div>
+                        </div>
+
+                        <!-- Scam Comparison -->
+                        <div class="card comparison-card">
+                            <div class="card-header">
+                                <h3>📊 Scam Pattern Comparison</h3>
+                                <p class="card-subtitle">Similarity rating compared to common internet scams</p>
+                            </div>
+                            <div class="card-body flex-column justify-center" id="comparison-container">
+                                <!-- Comparison bars injected dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: AI Rewrite Assistant -->
+                    <div class="results-row row-1col">
+                        <div class="card rewrite-card">
+                            <div class="card-header">
+                                <h3>✍️ AI Recruitment Rewrite Assistant</h3>
+                                <p class="card-subtitle">How a legitimate recruiter would publish this job description</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="rewrite-flex">
+                                    <div class="rewrite-box original-box">
+                                        <div class="rewrite-title-tag tag-red">Original Wording</div>
+                                        <div class="rewrite-content" id="rewrite-original">
+                                            <!-- Original flagged text -->
+                                        </div>
+                                    </div>
+                                    <div class="rewrite-arrow">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="9 18 15 12 9 6"/>
+                                        </svg>
+                                    </div>
+                                    <div class="rewrite-box sanitized-box">
+                                        <div class="rewrite-title-tag tag-green">Sanitized Rewrite</div>
+                                        <div class="rewrite-content" id="rewrite-sanitized">
+                                            <!-- Rewritten text -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rewrite-explanations mt-md">
+                                    <span class="section-label">Investigation Corrective Measures:</span>
+                                    <ul class="explanations-list" id="rewrite-changes">
+                                        <!-- Dynamic checklist items -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 6: AI Cyber Mentor -->
+                    <div class="results-row row-1col">
+                        <div class="card mentor-card">
+                            <div class="card-header-mentor">
+                                <div class="mentor-icon">🎓</div>
+                                <div>
+                                    <h3>AI Cyber Mentor Security Brief</h3>
+                                    <p class="mentor-subtitle">Key training takeaway from this investigation</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mentor-lesson-box">
+                                    <div class="mentor-topic" id="mentor-title">Lesson: Payment Schemes in Recruiting</div>
+                                    <p class="mentor-desc" id="mentor-content">
+                                        No legitimate employer requires a candidate to pay fee deposits, registration fees, training course software subscriptions, or background check costs before starting employment. Genuine recruiters assume all operational setup expenses themselves.
+                                    </p>
+                                    <div class="mentor-tip-bar" id="mentor-tip">
+                                        <strong>💡 Shield Action:</strong> If a job demands payment via UPI, gift cards, or crypto, immediately abort communications.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 7: Interactive AI Conversation -->
+                    <div class="results-row row-1col">
+                        <div class="card chat-card">
+                            <div class="card-header border-glow-cyan">
+                                <div class="chat-header-title">
+                                    <span class="chat-avatar-dot pulsed"></span>
+                                    <h3>💬 Ask Aegis Investigator Bot</h3>
+                                </div>
+                                <p class="card-subtitle">Ask questions about this specific scam or request safe alternative paths.</p>
+                            </div>
+                            <div class="card-body chat-body-container">
+                                <div class="chat-messages" id="chat-messages-container">
+                                    <div class="chat-msg system-msg">
+                                        <span class="msg-sender">Aegis Agent:</span>
+                                        <p class="msg-text">I have analyzed this job post and built the forensics file. You can ask me clarifying questions about details found in the report, safety concerns, or how to handle communications.</p>
+                                        <span class="msg-time">Just Now</span>
+                                    </div>
+                                </div>
+                                <div class="chat-suggested-prompts" id="chat-quick-questions">
+                                    <!-- Injected suggested prompt pills -->
+                                </div>
+                                <div class="chat-input-area">
+                                    <input type="text" id="chat-input-box" placeholder="Ask a question (e.g., 'What if I already shared my phone number?', 'How do I check if the website is real?')..." autocomplete="off">
+                                    <button id="btn-chat-send" class="btn btn-primary btn-chat">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= COMMUNITY INTEL TAB ================= -->
+        <section id="pane-community" class="tab-pane">
+            <div class="grid-layout">
+                <!-- Row 1: Metrics Overview & Report Form -->
+                <div class="results-row row-2col">
+                    <!-- Metrics & Trends -->
+                    <div class="card community-trends-card">
+                        <div class="card-header">
+                            <h2>📊 Threat Intelligence Trends</h2>
+                            <p class="card-subtitle">Aggregate weekly data compiled from community reports</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="intel-stat-grid">
+                                <div class="stat-box">
+                                    <span class="stat-num text-red">4,812</span>
+                                    <span class="stat-lbl">Active Scams Tracked</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-num text-yellow">128</span>
+                                    <span class="stat-lbl">Fake Domains Blocked</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-num text-cyan">₹18.4L</span>
+                                    <span class="stat-lbl">Estimated Saved Funds</span>
+                                </div>
+                            </div>
+
+                            <div class="trend-section">
+                                <span class="section-label">Most Exploited Brands/Names:</span>
+                                <ul class="trend-list" id="trend-brands">
+                                    <li><span>1. Telegram Remote Task Corp</span><span class="badge badge-red">High Vol</span></li>
+                                    <li><span>2. Amazon Part-Time Handler</span><span class="badge badge-red">High Vol</span></li>
+                                    <li><span>3. Google Operations Partner (Fake)</span><span class="badge badge-yellow">Medium Vol</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="trend-section mt-md">
+                                <span class="section-label">Prevalent Payment Vectors:</span>
+                                <div class="vector-bar-chart">
+                                    <div class="vector-bar-item">
+                                        <div class="vector-name">UPI / Google Pay (Direct Transfer)</div>
+                                        <div class="progress-bar-bg"><div class="progress-bar-fill fill-red" style="width: 58%;"></div></div>
+                                        <span class="vector-pct">58%</span>
+                                    </div>
+                                    <div class="vector-bar-item">
+                                        <div class="vector-name">Crypto Wallets (USDT/BTC)</div>
+                                        <div class="progress-bar-bg"><div class="progress-bar-fill fill-red" style="width: 24%;"></div></div>
+                                        <span class="vector-pct">24%</span>
+                                    </div>
+                                    <div class="vector-bar-item">
+                                        <div class="vector-name">Recharge / Gift Cards (Steam/Apple)</div>
+                                        <div class="progress-bar-bg"><div class="progress-bar-fill fill-yellow" style="width: 18%;"></div></div>
+                                        <span class="vector-pct">18%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Scam Report Card -->
+                    <div class="card community-form-card">
+                        <div class="card-header border-glow-red">
+                            <h2>📢 File Threat Intelligence Report</h2>
+                            <p class="card-subtitle">Contribute to the global cyber defense index. Reports are verified anonymized records.</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="report-form" class="form-container" onsubmit="return false;">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="rep-company">Scam Company/Recruiter Name *</label>
+                                        <input type="text" id="rep-company" placeholder="e.g. Meta Recruit India Ltd" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rep-vector">Contact Channel Used *</label>
+                                        <select id="rep-vector" required>
+                                            <option value="" disabled selected>Select channel</option>
+                                            <option value="WhatsApp">WhatsApp</option>
+                                            <option value="Telegram">Telegram</option>
+                                            <option value="Email">Email</option>
+                                            <option value="SMS">SMS / Text Message</option>
+                                            <option value="LinkedIn">LinkedIn</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rep-payment">Demanded Payment Amount (if any)</label>
+                                    <input type="text" id="rep-payment" placeholder="e.g. ₹1000 for training, None">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rep-text">Scam Offer Details / Description *</label>
+                                    <textarea id="rep-text" placeholder="Copy paste suspicious messages or details here..." required></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="reset" class="btn btn-secondary">Reset Form</button>
+                                    <button type="submit" id="btn-submit-report" class="btn btn-primary btn-alert">Submit Report</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Live Feed Database -->
+                <div class="results-row row-1col">
+                    <div class="card list-scams-card">
+                        <div class="card-header">
+                            <h2>📜 Live Database of Reported Incidents</h2>
+                            <p class="card-subtitle">Scroll through recent community submissions. Verified records are flagged immediately.</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="feed-filter-bar">
+                                <input type="text" id="feed-search" placeholder="Search by company name, keywords, or channel...">
+                                <span class="feed-count-tag" id="feed-count">showing 3 entries</span>
+                            </div>
+                            <div class="scams-feed" id="community-reports-feed">
+                                <!-- Pre-populated and user-submitted reports go here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Aegis Cyber Intelligence. Empowered by Gemini AI for Recruitment Threat Forensics.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Guard</a>
+                <span class="divider">|</span>
+                <a href="#disclosure">Responsible Disclosure</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load scripts -->
+    <script src="mockData.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
